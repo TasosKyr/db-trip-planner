@@ -11,8 +11,8 @@ const Layout = ({ children }: Props) => {
   console.log(backgroundImage);
   return (
     <>
-      <main>{children}</main>
-      <div style={{position: "fixed", zIndex: "-1", width: "100vw", height: "100vh"}}>
+      {/* <div className="fixed w-screen h-screen -z-1"> */}
+      <div style={{position: "fixed", width: "100vw", height: "100vh", zIndex: "-1"}}>
         <Image
           src={backgroundImage}
           alt="Travel planning process"
@@ -20,7 +20,7 @@ const Layout = ({ children }: Props) => {
           objectFit="cover"
         />
       </div>
-      {/* <div className="bg-scroll bg-my_bg_image h-[972px]"></div> */}
+      <main className="px-40 py-10 flex justify-center">{children}</main>
       <Footer />
     </>
   );

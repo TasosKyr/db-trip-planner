@@ -9,7 +9,7 @@ export default function App() {
   
   return (
     //@ts-ignore
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full p-10 bg-grey bg-opacity-40 backdrop-blur-md rounded drop-shadow-lg flex justify-center">
       <input type="text" placeholder="Where From" {...register} />
       <input type="text" placeholder="Where To" {...register} />
       <input type="datetime-local" placeholder="When" {...register} />
