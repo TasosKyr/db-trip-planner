@@ -1,48 +1,58 @@
-import React, { FormEvent, useState } from "react";
-import { useForm, UseFormRegister, FieldValues, } from "react-hook-form";
+import { useForm, UseFormRegister, FieldValues } from "react-hook-form";
 import PuffLoader from "react-spinners/PuffLoader";
-import { useSearch } from "src/hooks/search";
 
-import { searchRoute } from "src/lib/api"
-import { useQuery } from "@tanstack/react-query";
-
-const fields = [
-  {
-    type: "text",
-    name: "origin",
-    required: "true",
-    label: "Where To",
-    placeholder: "Munich Hbf",
-  },
-  {
-    type: "text",
-    name: "destination",
-    required: "true",
-    label: "Where From",
-    placeholder: "Berlin Hbf",
-  },
-  { type: "datetime-local", name: "date", required: "true", label: "When" },
-];
-
+interface InputProps {
+  setOrigin: (value: string) => void;
+  setDestination: (value: string) => void;
+  setDate: (value: string) => void;
+  isFetching: boolean;
+}
 interface FormProps {
   register: UseFormRegister<FieldValues>;
   isFetching: boolean;
   errors: { [error: string]: any };
 }
 
-export default function Input() {
+export default function Input({
+  setOrigin,
+  setDestination,
+  setDate,
+  isFetching,
+}: InputProps) {
   const {
     register,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
   } = useForm();
 
-  const [origin, setOrigin] = useState("")
-  const [destination, setDestination] = useState("")
-  const [date, setDate] = useState("")
+  const fields = [
+    {
+      type: "text",
+      name: "origin",
+      required: "This field is required",
+      minLength: { value: 3, message: "Please type more than 3 characters" },
+      onChangeFn: setOrigin,
+      label: "Where To",
+      placeholder: "Munich Hbf",
+    },
+    {
+      type: "text",
+      name: "destination",
+      required: "This field is required",
+      minLength: { value: 3, message: "Please type more than 3 characters" },
+      onChangeFn: setDestination,
+      label: "Where From",
+      placeholder: "Berlin Hbf",
+    },
+    {
+      type: "datetime-local",
+      name: "date",
+      required: "This field is required",
+      onChangeFn: setDate,
+      label: "When",
+    },
+  ];
 
-  const { data, isFetching, isError, error, refetch } = useSearch({origin, destination, date});
- 
   const renderForm = ({ register, errors, isFetching }: FormProps) => {
     return (
       <>
@@ -52,7 +62,11 @@ export default function Input() {
               <label htmlFor={field.name}>{field.label}</label>
               <input
                 type={field.type}
-                {...register(field.name, { required: field.required })}
+                {...register(field.name, {
+                  required: field.required,
+                  minLength: field.minLength,
+                  onChange: (e) => field.onChangeFn(e.target.value)
+                })}
                 className="rounded-lg h-10 text-black"
               />
               <div className="text-red">{errors[field.name]?.message}</div>
@@ -70,15 +84,10 @@ export default function Input() {
     );
   };
 
-  // const handleSubmit = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   await refetch();
-  // };
-
-  const onSubmit = handleSubmit(data => {
-    setOrigin(data.origin)
-    setDestination(data.destination)
-    setDate(data.date)
+  const onSubmit = handleSubmit((data) => {
+    setOrigin(data.origin);
+    setDestination(data.destination);
+    setDate(data.date);
   });
 
   return (

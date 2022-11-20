@@ -9,14 +9,33 @@ export class ApiError extends Error {
   }
 }
 
-const SEARCH_URL =
-  "https://v5.db.transport.rest/journeys?from=8011113&to=8010159&departure=tomorrow+2pm&results=2'";
+const MAIN_URL = "https://v5.db.transport.rest/";
 
-export async function searchRoute({origin, destination, date}, options) {
-  console.log({origin, destination, date})
+const getStationsUrl = (station) => `${MAIN_URL}locations?query=${station}`;
+
+const getSearchUrl = ({ origin, destination, date }) =>
+  `${MAIN_URL}journeys?from=${origin}&to=${destination}&departure=${date}&results=5'`;
+
+export async function getStations(query, options) {
+  console.log(getStationsUrl(query))
   try {
-    const response = await fetch(SEARCH_URL, options);
-    const data = await response.json()
+    const response = await fetch(getStationsUrl(query), options);
+    const data = await response.json();
+    console.log(data)
+    return data
+  } catch (err) {
+    throw new ApiError(url, response.status);
+  }
+}
+
+export async function searchRoute({ originId, destinationId, date }, options) {
+  // console.log({originId, destinationId, date})
+  try {
+    const response = await fetch(
+      getSearchUrl({ originId, destinationId, date }),
+      options
+    );
+    const data = await response.json();
     return data?.journeys;
   } catch (err) {
     throw new ApiError(url, response.status);

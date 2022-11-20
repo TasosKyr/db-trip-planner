@@ -1,8 +1,26 @@
 import Head from "next/head";
-import Image from "next/image";
+import React, { useState, useEffect } from "react";
 import Input from "src/components/Input";
+import { useSearch, useStations } from "src/hooks/queries";
 
 export default function Home() {
+  const [origin, setOrigin] = useState("")
+  const [destination, setDestination] = useState("")
+  const [originId, setOriginId] = useState("")
+  const [destinationId, setDestinationId] = useState("")
+  const [date, setDate] = useState("")
+
+  const { searchResults, isFetching, isError, error, search } = useSearch({originId, destinationId, date});
+  
+  const { stationId, fetchStation } = useStations({origin, destination, date});
+
+  useEffect(() => {
+    return () => {
+      console.log({origin});
+
+    };
+  }, [origin])
+
   return (
     <div>
       <Head>
@@ -12,7 +30,8 @@ export default function Home() {
       </Head>
       <div className="flex flex-col items-center">
         <h1 className="text-2xl font-bold ">Hey, Where you off to Next?</h1>
-        <Input />
+        <Input setOrigin={setOrigin} setDestination={setDestination} setDate={setDate} isFetching={isFetching}/>
+        {/* <SearchResults searchResults={searchResults} /> */}
       </div>
     </div>
   );
