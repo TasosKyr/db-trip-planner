@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import Input from "src/components/Input"
+import Input from "src/components/Input";
 
 export default function Home() {
   return (
@@ -11,8 +11,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-bold ">Hey, Where you off to Next?</h1>
-      <Input />
+        <h1 className="text-2xl font-bold ">Hey, Where you off to Next?</h1>
+        <Input />
       </div>
     </div>
   );
