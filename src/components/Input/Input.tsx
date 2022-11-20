@@ -1,7 +1,10 @@
-import React, { FormEvent } from "react";
-import { useForm, UseFormRegister, FieldValues } from "react-hook-form";
+import React, { FormEvent, useState } from "react";
+import { useForm, UseFormRegister, FieldValues, } from "react-hook-form";
 import PuffLoader from "react-spinners/PuffLoader";
 import { useSearch } from "src/hooks/search";
+
+import { searchRoute } from "src/lib/api"
+import { useQuery } from "@tanstack/react-query";
 
 const fields = [
   {
@@ -23,19 +26,24 @@ const fields = [
 
 interface FormProps {
   register: UseFormRegister<FieldValues>;
-  isLoading: boolean;
+  isFetching: boolean;
   errors: { [error: string]: any };
 }
 
 export default function Input() {
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors },
+    handleSubmit
   } = useForm();
-  //@ts-ignore
-  const { data, isLoading, isError, error, refetch } = useSearch();
 
-  const renderForm = ({ register, errors, isLoading }: FormProps) => {
+  const [origin, setOrigin] = useState("")
+  const [destination, setDestination] = useState("")
+  const [date, setDate] = useState("")
+
+  const { data, isFetching, isError, error, refetch } = useSearch({origin, destination, date});
+ 
+  const renderForm = ({ register, errors, isFetching }: FormProps) => {
     return (
       <>
         {fields?.map((field) => {
@@ -56,24 +64,30 @@ export default function Input() {
           type="submit"
           className="rounded-xl bg-slate-300 px-3 text-xs font-semibold h-10 mt-4 w-fit"
         >
-          {isLoading ? <PuffLoader /> : "TAKE ME THERE"}
+          {isFetching ? <PuffLoader /> : "TAKE ME THERE"}
         </button>
       </>
     );
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    refetch();
-  };
+  // const handleSubmit = async (e: FormEvent) => {
+  //   e.preventDefault();
+  //   await refetch();
+  // };
+
+  const onSubmit = handleSubmit(data => {
+    setOrigin(data.origin)
+    setDestination(data.destination)
+    setDate(data.date)
+  });
 
   return (
     //@ts-ignore
     <form
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
       className="w-fit h-fit p-10 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex md:justify-center flex-wrap items-end justify-start"
     >
-      {renderForm({ register, errors, isLoading })}
+      {renderForm({ register, errors, isFetching })}
     </form>
   );
 }
