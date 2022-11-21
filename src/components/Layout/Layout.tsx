@@ -19,12 +19,12 @@ const Layout = ({ children }: Props) => {
           zIndex: "-1",
         }}
       > */}
-        <Image
+        {/* <Image
           src={backgroundImage}
           alt="Travel planning process"
           fill
           object-fit="cover"
-        />
+        /> */}
       </div>
       <main className="px-40 py-10 flex justify-center">{children}</main>
       <Footer />

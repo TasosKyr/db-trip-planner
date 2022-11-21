@@ -1,29 +1,34 @@
 import { useForm, UseFormRegister, FieldValues } from "react-hook-form";
 import PuffLoader from "react-spinners/PuffLoader";
+import React, { useState, useEffect } from "react";
+import Autocomplete from "src/components/Autocomplete";
 
 interface InputProps {
-  setOrigin: (value: string) => void;
-  setDestination: (value: string) => void;
+  setOriginId: (value: string) => void;
+  setDestinationId: (value: string) => void;
   setDate: (value: string) => void;
-  isFetching: boolean;
+  isLoading: boolean;
 }
 interface FormProps {
   register: UseFormRegister<FieldValues>;
-  isFetching: boolean;
+  isLoading: boolean;
   errors: { [error: string]: any };
 }
 
 export default function Input({
-  setOrigin,
-  setDestination,
+  setOriginId,
+  setDestinationId,
   setDate,
-  isFetching,
+  isLoading,
 }: InputProps) {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
 
   const fields = [
     {
@@ -44,41 +49,27 @@ export default function Input({
       label: "Where From",
       placeholder: "Berlin Hbf",
     },
-    {
-      type: "datetime-local",
-      name: "date",
-      required: "This field is required",
-      onChangeFn: setDate,
-      label: "When",
-    },
   ];
 
-  const renderForm = ({ register, errors, isFetching }: FormProps) => {
+  const renderForm = ({ register, errors, isLoading }: FormProps) => {
     return (
       <>
         {fields?.map((field) => {
-          return (
-            <div key={field.name} className="flex flex-col mr-5 text-white">
-              <label htmlFor={field.name}>{field.label}</label>
-              <input
-                type={field.type}
-                {...register(field.name, {
-                  required: field.required,
-                  minLength: field.minLength,
-                  onChange: (e) => field.onChangeFn(e.target.value)
-                })}
-                className="rounded-lg h-10 text-black"
-              />
-              <div className="text-red">{errors[field.name]?.message}</div>
-            </div>
-          );
+          return <Autocomplete field={field} key={field.name}/>;
         })}
-
+        <input
+          type="datetime-local"
+          {...register("date", {
+            required: "This field is required",
+            minLength: 3,
+            onChange: (e) => setDate(e.target.value),
+          })}
+        />
         <button
           type="submit"
           className="rounded-xl bg-slate-300 px-3 text-xs font-semibold h-10 mt-4 w-fit"
         >
-          {isFetching ? <PuffLoader /> : "TAKE ME THERE"}
+          {isLoading ? <PuffLoader /> : "TAKE ME THERE"}
         </button>
       </>
     );
@@ -94,9 +85,9 @@ export default function Input({
     //@ts-ignore
     <form
       onSubmit={onSubmit}
-      className="w-fit h-fit p-10 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex md:justify-center flex-wrap items-end justify-start"
+      className="w-fit h-fit p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex md:justify-center flex-wrap items-end justify-start"
     >
-      {renderForm({ register, errors, isFetching })}
+      {renderForm({ register, errors, isLoading })}
     </form>
   );
 }
