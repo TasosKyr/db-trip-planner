@@ -55,19 +55,19 @@ export default function Input({
     return (
       <>
         {fields?.map((field) => {
-          return <Autocomplete field={field} key={field.name}/>;
+          return <Autocomplete field={field} key={field.name} />;
         })}
+        <div className="flex flex-col text-white md:w-60 w-full md:mr-5">
+        <label htmlFor="date">When</label>
         <input
           type="datetime-local"
-          {...register("date", {
-            required: "This field is required",
-            minLength: 3,
-            onChange: (e) => setDate(e.target.value),
-          })}
+          onChange={(e) => setDate(e.target.value)}
+          className="rounded-lg h-10  text-black"
         />
+        </div>
         <button
           type="submit"
-          className="rounded-xl bg-slate-300 px-3 text-xs font-semibold h-10 mt-4 w-fit"
+          className="rounded-xl bg-slate-300 px-3 text-xs font-semibold h-10 mt-4 md:w-fit w-full"
         >
           {isLoading ? <PuffLoader /> : "TAKE ME THERE"}
         </button>
@@ -85,7 +85,7 @@ export default function Input({
     //@ts-ignore
     <form
       onSubmit={onSubmit}
-      className="w-fit h-fit p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex md:justify-center flex-wrap items-end justify-start"
+      className="md:w-fit h-fit p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex justify-center flex-wrap items-end w-full"
     >
       {renderForm({ register, errors, isLoading })}
     </form>

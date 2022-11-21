@@ -6,7 +6,7 @@ import {
   useOriginStations,
   useDestinationStations,
 } from "src/hooks/queries";
-import { searchRoute, getStations } from "src/lib/api";
+import { searchRoute } from "src/lib/api";
 
 export default function Home() {
   
@@ -20,7 +20,7 @@ export default function Home() {
     destinationId,
     date,
   });
-  
+
   return (
     <div>
       <Head>
@@ -29,8 +29,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col items-center">
-        <h1 className="text-2xl font-bold ">Hey, Where you off to Next?</h1>
-        {/* {originSuggestions?.map((el) => el.name)} */}
+        <h1 className="text-2xl font-bold">Hey, Where you off to Next?</h1>
         <Input
           setOriginId={setOriginId}
           setDestinationId={setDestinationId}

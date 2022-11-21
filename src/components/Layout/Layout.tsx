@@ -10,24 +10,12 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <>
-      <div className="!fixed !w-screen !h-screen !-z-1">
-      {/* <div
-        style={{
-          position: "fixed",
-          width: "100vw",
-          height: "100vh",
-          zIndex: "-1",
-        }}
-      > */}
-        {/* <Image
-          src={backgroundImage}
-          alt="Travel planning process"
-          fill
-          object-fit="cover"
-        /> */}
+      <div className="!fixed !w-screen !h-screen !-z-1 min-h-screen overflow-hidden bg-custom-img">
+        <main className="px-30 py-4 flex justify-center z-200">
+          {children}
+        </main>
+        <Footer />
       </div>
-      <main className="px-40 py-10 flex justify-center">{children}</main>
-      <Footer />
     </>
   );
 };
