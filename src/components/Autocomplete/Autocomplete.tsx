@@ -6,6 +6,7 @@ type Field = {
   label: string;
   name: string;
   type: string;
+  onChangeFn: () => void;
   // id: string;
 };
 
@@ -13,11 +14,24 @@ interface Props {
   field: Field;
 }
 
+type Location = {
+  id: string;
+  latitude: string;
+  longitude: string;
+  type: string;
+};
+
+type Item = {
+  name: string;
+  id: Location;
+};
+
 interface ItemProps {
   isHighlighted: boolean;
   getItemProps: () => void;
-  item: string;
+  item: Item;
   index: number;
+  setFn: () => void;
 }
 
 const Item = memo(function Item({
@@ -25,15 +39,17 @@ const Item = memo(function Item({
   getItemProps,
   item,
   index,
+  setFn
 }: ItemProps) {
   return (
     <li
       style={isHighlighted ? { backgroundColor: "#bde4ff" } : {}}
-      key={`${item}${index}`}
+      key={`${item.name}${index}`}
       {...getItemProps({ item, index })}
       className="p-1"
+      onClick={() => setFn(item.id)}
     >
-      {item}
+      {item.name}
     </li>
   );
 });
@@ -43,7 +59,11 @@ const Autocomplete = ({ field }: Props) => {
 
   function getSuggestions(inputValue: string) {
     fetchStations(inputValue).then((results) => {
-      const suggestions = results?.map((el) => el.name);
+      const suggestions = results?.map((el: Item) => ({
+        name: el.name,
+        id: el.location.id,
+      }));
+      console.log(suggestions);
       setSuggestions(suggestions);
     });
   }
@@ -55,6 +75,7 @@ const Autocomplete = ({ field }: Props) => {
     getInputProps,
     highlightedIndex,
     getItemProps,
+    selectItem,
   } = useCombobox({
     items: suggestions,
     onInputValueChange: ({ inputValue }) => {
@@ -82,11 +103,12 @@ const Autocomplete = ({ field }: Props) => {
           {isOpen &&
             suggestions?.map((item, index) => (
               <Item
-                key={item}
+                key={item?.name}
                 isHighlighted={highlightedIndex === index}
                 getItemProps={getItemProps}
                 item={item}
                 index={index}
+                setFn={field.onChangeFn}
               />
             ))}
         </ul>

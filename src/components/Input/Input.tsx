@@ -51,6 +51,10 @@ export default function Input({
     },
   ];
 
+  useEffect(() => {
+    console.log({origin, destination});
+  }, [origin, destination])
+
   const renderForm = ({ register, errors, isLoading }: FormProps) => {
     return (
       <>
@@ -82,7 +86,6 @@ export default function Input({
   });
 
   return (
-    //@ts-ignore
     <form
       onSubmit={onSubmit}
       className="md:w-fit h-fit p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex justify-center flex-wrap items-end w-full"

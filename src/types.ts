@@ -1,0 +1,19 @@
+id:"8011160"
+location:
+  id:"8011160"
+  latitude:52.524924
+  longitude:13.369629
+  type:"location"
+name:"Berlin Hbf"
+products:
+  bus:true
+  ferry:false
+  national:true
+  nationalExpress:true
+  regional:true
+  regionalExp:true
+  suburban:true
+  subway:true
+  taxi:false
+  tram:true
+type:"stop"
