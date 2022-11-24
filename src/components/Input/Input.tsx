@@ -23,7 +23,7 @@ export default function Input({
 
   const [origin, setOrigin] = useState<ListItem | null>(null);
   const [destination, setDestination] = useState<ListItem | null>(null);
-  const [date, setDate] = useState("");
+  // const [date, setDate] = useState(new Date());
 
   const fields: Field[] = [
     {
@@ -53,16 +53,16 @@ export default function Input({
           return <Autocomplete field={field} key={field.name} />;
         })}
         <div className="flex flex-col text-white md:w-60 w-full md:mr-5">
-        <label htmlFor="date">When</label>
+        <label className="sm:text-sm" htmlFor="date">When</label>
         <input
           type="datetime-local"
           onChange={(e) => setDate(e.target.value)}
-          className="rounded-lg h-10  text-black px-2"
+          className="h-10 w-full block appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
         />
         </div>
         <button
           type="submit"
-          className="rounded-xl bg-slate-300 px-3 text-xs font-semibold h-10 mt-4 md:w-fit w-full"
+          className="h-10 mt-4 md:w-60 w-full md:mr-5 justify-center rounded-md border border-transparent bg-indigo-700 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           {isLoading ? <PuffLoader /> : "TAKE ME THERE"}
         </button>

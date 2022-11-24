@@ -1,18 +1,13 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import Input from "src/components/Input";
-import {
-  useSearch,
-  useOriginStations,
-  useDestinationStations,
-} from "src/hooks/queries";
+import { useSearch } from "src/hooks/useSearch";
 import { searchRoute } from "src/lib/api";
 
 export default function Home() {
-  
   const [originId, setOriginId] = useState("");
   const [destinationId, setDestinationId] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Date>(new Date());
 
   const { searchResults, isError, error, search } = useSearch({
     originId,
