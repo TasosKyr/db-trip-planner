@@ -13,7 +13,6 @@ export default function Home() {
   const [originId, setOriginId] = useState("");
   const [destinationId, setDestinationId] = useState("");
   const [date, setDate] = useState("");
-  const [originSuggestions, setOriginSuggestions] = useState([]);
 
   const { searchResults, isError, error, search } = useSearch({
     originId,

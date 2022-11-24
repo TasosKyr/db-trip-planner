@@ -9,19 +9,20 @@ export async function fetchStations(query) {
   if (!query) return;
   try {
     const response = await fetch(getStationsUrl(query));
-    // console.log(response.json())
-    return response.json();
+    const data = response.json()
+    console.log("data", data)
+    return data;
   } catch (err) {
     throw new Error
   }
 }
 
-export async function searchRoute({ originId, destinationId, date }, options) {
-  // console.log({originId, destinationId, date})
-  if (!originId || !destinationId || !date) return;
+export async function searchRoute({ origin, destination, date }, options) {
+  // console.log({origin, destination, date})
+  if (!origin || !destination || !date) return;
   try {
     const response = await fetch(
-      getSearchUrl({ originId, destinationId, date }),
+      getSearchUrl({ origin, destination, date }),
       options
     );
     const data = await response.json();
