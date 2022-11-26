@@ -38,7 +38,7 @@ function getDuration({
 export default function SearchResults({ journeys = [] }) {
   // console.log({ searchResults.journeys });
   return (
-    <div className="flex flex-col w-full text-white overflow-y-auto pb-15 max-height: min-content">
+    <div className="flex flex-col w-full text-white h-full">
       {journeys?.map((journey) => {
         const departure = journey?.legs[0]?.plannedDeparture;
         const arrival =
@@ -66,7 +66,7 @@ export default function SearchResults({ journeys = [] }) {
                       {el.origin.name} to {el.destination.name}
                     </p>
                     </div> */}
-                      <div className="bg-gray-900 rounded-md px-4 w-full mr-1 flex justify-center">
+                      <div className="bg-gray-900 rounded-md px-4 w-full mr-1 flex flex-wrap justify-center">
                         {el?.line?.name || "walk"}
                       </div>
                     </>
