@@ -1,22 +1,3 @@
-// id:"8011160"
-// location:
-//   id:"8011160"
-//   latitude:52.524924
-//   longitude:13.369629
-//   type:"location"
-// name:"Berlin Hbf"
-// products:
-//   bus:true
-//   ferry:false
-//   national:true
-//   nationalExpress:true
-//   regional:true
-//   regionalExp:true
-//   suburban:true
-//   subway:true
-//   taxi:false
-//   tram:true
-// type:"stop"
 import { Dispatch, SetStateAction } from "react";
 export type Location = {
   id: string;
@@ -38,9 +19,39 @@ export type Field = {
   placeholder: string;
 };
 
-
 export interface SearchParams {
   originId?: string;
   destinationId?: string;
   date: string;
+}
+
+export interface Price {
+  amount?: number;
+  currency?: string;
+  hint?: string;
+}
+
+interface DestinationAndOrigin {
+  id?: string;
+  location?: Location;
+  name?: string;
+}
+
+interface Line {
+  name: string;
+}
+
+export interface Trip {
+  destination: DestinationAndOrigin;
+  origin: DestinationAndOrigin;
+  line: Line;
+  plannedArrival: string;
+  plannedArrivalPlatform: string;
+  plannedDeparture: string;
+  plannedDeparturePlatform: string;
+}
+
+export interface Journey {
+  legs: Trip[];
+  price: Price;
 }

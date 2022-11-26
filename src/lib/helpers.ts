@@ -24,7 +24,7 @@ export function getDateDifference({
   return [Math.round(days), Math.round(hours), Math.round(minutes)];
 }
 
-export function getPrice(price: string | undefined) {
+export function getPrice(price: number | undefined) {
   return price ? price + "€" : "Fare is not available";
 }
 

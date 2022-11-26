@@ -1,6 +1,7 @@
 import React from "react";
 import SearchResultsItem from "src/components/SearchResultsItem";
 import { getTimeFromDate, getDateDifference, getPrice } from "src/lib/helpers";
+import { Journey } from "src/types"
 
 function getTimes({
   departure,
@@ -39,7 +40,7 @@ export default function SearchResults({ journeys = [] }) {
   // console.log({ searchResults.journeys });
   return (
     <div className="flex flex-col w-full text-white h-full">
-      {journeys?.map((journey) => {
+      {journeys?.map((journey: Journey) => {
         const departure = journey?.legs[0]?.plannedDeparture;
         const arrival =
           journey?.legs[journey?.legs?.length - 1]?.plannedArrival;
