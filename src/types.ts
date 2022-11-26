@@ -40,7 +40,7 @@ export type Field = {
 
 
 export interface SearchParams {
-  originId: string;
-  destinationId: string;
-  date: Date;
+  originId?: string;
+  destinationId?: string;
+  date: string;
 }

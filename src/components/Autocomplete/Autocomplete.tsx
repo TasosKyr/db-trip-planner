@@ -52,10 +52,6 @@ const Autocomplete = ({ field }: Props) => {
     getSuggestions(debouncedQuery)
   }, [debouncedQuery])
 
-  useEffect(() => {
-    console.log(suggestions)
-  }, [suggestions])
-
   const {
     isOpen,
     getLabelProps,

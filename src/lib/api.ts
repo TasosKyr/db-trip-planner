@@ -5,15 +5,13 @@ const getStationsUrl = (station: string) =>
   `${MAIN_URL}locations?query=${station}`;
 
 const getSearchUrl = ({ originId, destinationId, date }: SearchParams) =>
-  `${MAIN_URL}journeys?from=${originId}&to=${destinationId}&departure=${date}&results=5'`;
+  `${MAIN_URL}journeys?from=${originId}&to=${destinationId}&departure=${date}&results=10'`;
 
 export async function fetchStations(query: string) {
   if (!query) return;
   try {
     const response = await fetch(getStationsUrl(encodeURIComponent(query)));
-    const data = response.json();
-    console.log("data", data);
-    return data;
+    return response.json();
   } catch (err) {
     throw new Error();
   }
@@ -24,8 +22,7 @@ export async function searchRoute({
   destinationId,
   date,
 }: SearchParams) {
-  // console.log({origin, destination, date})
-  if (!originId || !destinationId || !date) return;
+  if (!originId || !destinationId || !date) return [];
   try {
     const response = await fetch(
       getSearchUrl({ originId, destinationId, date })

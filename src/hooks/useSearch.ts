@@ -12,7 +12,7 @@ const getSearchConfig = ({
   date,
 }: SearchParams) => ({
   queryKey: [SEARCH_QUERY_KEY, { originId, destinationId, date }],
-  queryFn: searchRoute({ originId, destinationId, date }),
+  queryFn: () => searchRoute({ originId, destinationId, date }),
   enabled: false,
   refetchOnWindowFocus: false,
   })
@@ -22,5 +22,5 @@ export function useSearch({ originId, destinationId, date }: SearchParams) {
   //@ts-ignore
   const { data, isLoading, isError, error, refetch } = useQuery(getSearchConfig({ originId, destinationId, date }));
 
-  return { searchResults: data, isError, error, search: refetch };
+  return { journeys: data, isError, error, search: refetch };
 }
