@@ -22,7 +22,7 @@ function getTimes({
   const arrivalTime = getTimeFromDate(arrival);
 
   return (
-    <p className="text-xl mr-3 font-bold">{`${departureTime}-${arrivalTime} `}</p>
+    <p className="text-lg md:text-xl mr-3 font-bold">{`${departureTime}-${arrivalTime} `}</p>
   );
 }
 
@@ -33,12 +33,12 @@ function getDuration({
   departure: string;
   arrival: string;
 }) {
-  if (!departure || !arrival) return <p>Times not available for this trip</p>;
+  if (!departure || !arrival) return <p>Times not available</p>;
 
   const [days, hours, minutes] = getDateDifference({ departure, arrival });
 
   return (
-    <p className="text-xs">
+    <p>
       {days > 0 ? <span>{` | ${days}d`}</span> : ` | ${hours}h ${minutes}min`}
     </p>
   );
@@ -52,28 +52,26 @@ export default function SearchResultsItem({ journey }: Props) {
 
   return (
     <>
-      <div className="my-2 h-fit p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex flex-col w-full text-xs flex-wrap">
-        <div className="flex justify-between flex-wrap items-end w-full">
-          <div className="flex items-center">
+      <div className="my-2 h-fit sm:p-5 p-2 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex flex-col w-full flex-wrap">
+        <div className="flex justify-between flex-wrap items-end w-full break-words">
+          <div className="flex items-center flex-wrap">
             {getTimes({ departure, arrival })}
             {getDuration({ departure, arrival })}
-            <p className="text-xs">{`, ${journey?.legs?.length} Changes`}</p>
+            <p >{`, ${journey?.legs?.length} Changes`}</p>
           </div>
-          <p className="text-xl font-extrabold">
+          <p className="font-bold sm:text-xl text-lg mx-2">
             {getPrice(journey?.price?.amount)}
           </p>
         </div>
-        <div className="flex w-full justify-evenly">
+        <div className="flex justify-start sm:justify-evenly flex-wrap sm:flex-nowrap mb-4 w-full">
           {journey?.legs?.map((trip: Trip, index: number) => {
             return (
-              <>
                 <div
-                  className="bg-gray-900 rounded-md px-4 w-full mr-1 flex flex-wrap justify-center mb-4"
+                  className="bg-gray-900 rounded-md px-4 w-fill sm:w-full mr-1 flex mb-1"
                   key={`${trip?.line?.name}-${index}`}
                 >
                   {trip?.line?.name || "walking"}
                 </div>
-              </>
             );
           })}
         </div>

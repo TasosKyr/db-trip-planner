@@ -80,7 +80,7 @@ export default function Input({
   return (
     <form
       onSubmit={handleOnSubmit}
-      className="md:w-fit h-fit p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex justify-center flex-wrap items-end w-full z-10 mb-2"
+      className="sm:w-fit h-fit w-full p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex justify-center flex-wrap items-end z-10 mb-2"
     >
       {renderForm()}
     </form>

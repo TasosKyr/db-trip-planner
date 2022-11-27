@@ -71,11 +71,11 @@ const Autocomplete = ({ field }: Props) => {
   });
 
   return (
-    <div className="flex flex-col text-white md:w-60 w-full md:mr-5">
-      <label className="sm:text-sm" {...getLabelProps()} htmlFor={field.name} id={useId()}>
+    <div className="flex flex-col text-white sm:w-60 w-full sm:mr-5">
+      <label {...getLabelProps()} htmlFor={field.name} id={useId()}>
         {field.label}
       </label>
-      <div className="md:w-60 w-full md:mr-5">
+      <div className="w-full md:mr-5">
         <input
           type={field.type}
           {...getInputProps()}
@@ -88,11 +88,12 @@ const Autocomplete = ({ field }: Props) => {
         />
         <ul
           {...getMenuProps()}
-          className="h-fit border-y-0 absolute z-150 overflow-y-auto border-gray-300 bg-white text-gray-900 sm:text-sm rounded-none rounded-b-md md:w-60"
+          className="h-fit border-y-0 absolute z-150 overflow-y-auto border-gray-300 bg-white text-gray-900 rounded-none rounded-b-md w-full overflow-hidden box-border sm:w-60"
           id={useId()}
           aria-labelledby={useId()}
         >
-          {isOpen &&
+          {
+          isOpen &&
             suggestions?.map((item: ListItem, index: number) => (
               <Item
                 key={item.name}

@@ -25,7 +25,7 @@ export function getDateDifference({
 }
 
 export function getPrice(price: number | undefined) {
-  return price ? price + "€" : "Fare is not available";
+  return price ? price + "€" : "Fare is N/A";
 }
 
 export function getCurrentDate() {
