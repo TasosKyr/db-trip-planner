@@ -23,10 +23,10 @@ const Item = memo(function Item({
 }: ItemProps) {
   return (
     <li
-      className={
+    key={`${item.name}-${index}`}
+    className={
         isHighlighted ? "bg-blue-300 p-1" : "p-1 flex items-stretch w-full"
       }
-      key={`${item.name}-${index}`}
       {...getItemProps({ item, index })}
       id={useId()}
     >

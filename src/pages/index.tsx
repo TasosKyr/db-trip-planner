@@ -2,23 +2,26 @@ import Head from "next/head";
 import React, { useState, FormEvent, useEffect } from "react";
 import Input from "src/components/Input";
 import { useSearch } from "src/hooks/useSearch";
-import { ListItem } from "src/types"
+import { ListItem } from "src/types";
 import SearchResults from "src/components/SearchResults/SearchResults";
+import PuffLoader from "react-spinners/PuffLoader";
 
 export default function Home() {
   const [origin, setOrigin] = useState<ListItem | null>(null);
   const [destination, setDestination] = useState<ListItem | null>(null);
   const [date, setDate] = useState<string>(new Date().toISOString());
 
-  const { journeys, search } = useSearch({
-      originId: origin?.location?.id,
-      destinationId: destination?.location?.id,
-      date,
+  const { journeys, search, fetchStatus } = useSearch({
+    originId: origin?.location?.id,
+    destinationId: destination?.location?.id,
+    date,
   });
+
+  const isDisabled: boolean = origin?.name && destination?.name ? false : true;
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    search()
+    search();
   };
 
   return (
@@ -30,15 +33,19 @@ export default function Home() {
       </Head>
 
       <div className="flex flex-col items-center max-w-screen overflow-hidden sm:overflow-visible text-xs sm:text-md">
-        <h1 className="text-2xl font-bold sm:text-md">Hey, where you off to Next?</h1>
+        <h1 className="text-2xl font-bold sm:text-md">
+          Hey, where you off to Next?
+        </h1>
         <Input
           setOrigin={setOrigin}
           setDestination={setDestination}
           setDate={setDate}
-          isLoading={false}
+          fetchStatus={fetchStatus}
           date={date}
           handleOnSubmit={handleOnSubmit}
+          isDisabled={isDisabled}
         />
+        {fetchStatus === "fetching" ? <PuffLoader />: ""}
         <SearchResults journeys={journeys} />
       </div>
     </div>

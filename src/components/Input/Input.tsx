@@ -1,38 +1,30 @@
-import { UseFormRegister, FieldValues } from "react-hook-form";
-import PuffLoader from "react-spinners/PuffLoader";
 import React, { Dispatch, SetStateAction, FormEvent } from "react";
 import Autocomplete from "src/components/Autocomplete";
 import { Field, ListItem } from "src/types";
 import { getCurrentDate } from "src/lib/helpers";
+
 interface InputProps {
   setOrigin: Dispatch<SetStateAction<ListItem | null>>;
   setDestination: Dispatch<SetStateAction<ListItem | null>>;
   setDate: Dispatch<SetStateAction<string>>;
-  isLoading: boolean;
+  fetchStatus: string;
   handleOnSubmit: (e: FormEvent) => void;
   date: string;
-}
-interface FormProps {
-  register: UseFormRegister<FieldValues>;
-  isLoading: boolean;
-  errors: { [error: string]: any };
+  isDisabled: boolean;
 }
 
 export default function Input({
-  isLoading,
+  fetchStatus,
+  isDisabled,
   setOrigin,
   setDestination,
   setDate,
   handleOnSubmit,
 }: InputProps) {
-  // const [date, setDate] = useState(new Date());
-
   const fields: Field[] = [
     {
       type: "text",
       name: "origin",
-      // required: "This field is required",
-      // minLength: { value: 3, message: "Please type more than 3 characters" },
       onChangeFn: setOrigin,
       label: "Where From",
       placeholder: "e.g.Berlin Hbf",
@@ -40,8 +32,6 @@ export default function Input({
     {
       type: "text",
       name: "destination",
-      // required: "This field is required",
-      // minLength: { value: 3, message: "Please type more than 3 characters" },
       onChangeFn: setDestination,
       label: "Where To",
       placeholder: "e.g. Munich Hbf",
@@ -69,9 +59,16 @@ export default function Input({
         </div>
         <button
           type="submit"
-          className="h-10 mt-4 md:w-60 w-full justify-center rounded-md border border-transparent bg-indigo-700 py-2 px-4 font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          disabled={isDisabled}
+          className={`h-10 mt-4 md:w-60 w-full justify-center rounded-md border border-transparent  py-2 px-4 font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+            isDisabled ? "bg-gray-700" : "bg-indigo-700 hover:bg-indigo-800 "
+          }`}
         >
-          {isLoading ? <PuffLoader /> : "TAKE ME THERE"}
+          {isDisabled
+            ? "SELECT STATIONS"
+            : fetchStatus === "fetching"
+            ? "ALMOST THERE"
+            : "TAKE ME THERE"}
         </button>
       </>
     );

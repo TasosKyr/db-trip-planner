@@ -11,15 +11,14 @@ interface Props {
 }
 
 export default function TripDetails({ journey, isOpen }: Props): JSX.Element {
-  
+
   return (
     <div className={`${isOpen ? "mt-5" : "hidden"}`}>
       {journey?.legs?.map((trip: Trip, index: number) => {
         return (
-          <>
             <div
               className="bg-gray-500 rounded-md px-4 mr-1 flex flex-col flex-wrap items-center mb-4 content-center"
-              key={`${trip?.line?.name}_${index}`}
+              key={`${trip?.direction}_${index}`}
             >
               <div className="flex items-center my-1 content-start w-full">
                 <p className="font-bold">
@@ -89,7 +88,6 @@ export default function TripDetails({ journey, isOpen }: Props): JSX.Element {
                 </div>
               </div>
             </div>
-          </>
         );
       })}
     </div>

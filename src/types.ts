@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+
 export type Location = {
   id: string;
   latitude: string;
@@ -50,7 +51,6 @@ export interface Trip {
   plannedArrivalPlatform: string;
   plannedDeparture: string;
   plannedDeparturePlatform: string;
-
 }
 
 export interface Journey {
