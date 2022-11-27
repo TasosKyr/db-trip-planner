@@ -64,12 +64,12 @@ export default function Input({
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setDate(e.target.value)
             }
-            className="h-10 w-full block appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            className="h-10 w-full block md:w-60 appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
           />
         </div>
         <button
           type="submit"
-          className="h-10 mt-4 md:w-60 w-full md:mr-5 justify-center rounded-md border border-transparent bg-indigo-700 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          className="h-10 mt-4 md:w-60 w-full justify-center rounded-md border border-transparent bg-indigo-700 py-2 px-4 font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           {isLoading ? <PuffLoader /> : "TAKE ME THERE"}
         </button>
@@ -80,7 +80,7 @@ export default function Input({
   return (
     <form
       onSubmit={handleOnSubmit}
-      className="sm:w-fit h-fit w-full p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex justify-center flex-wrap items-end z-10 mb-2"
+      className="h-fit w-full p-5 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex justify-center flex-wrap items-end z-10 mb-2 overflow-hidden md:overflow-visible"
     >
       {renderForm()}
     </form>

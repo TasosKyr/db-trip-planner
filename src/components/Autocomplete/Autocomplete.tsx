@@ -1,8 +1,8 @@
 import { useCombobox } from "downshift";
 import React, { useState, memo, useId, useEffect } from "react";
 import { fetchStations } from "src/lib/api";
-import { Field, ListItem } from "src/types"
-import useDebounce from "src/hooks/useDebounce"
+import { Field, ListItem } from "src/types";
+import useDebounce from "src/hooks/useDebounce";
 
 interface Props {
   field: Field;
@@ -10,7 +10,7 @@ interface Props {
 
 interface ItemProps {
   isHighlighted: boolean;
-  getItemProps: ({ item, index }: {item: ListItem, index: number}) => object;
+  getItemProps: ({ item, index }: { item: ListItem; index: number }) => object;
   item: ListItem;
   index: number;
 }
@@ -23,7 +23,9 @@ const Item = memo(function Item({
 }: ItemProps) {
   return (
     <li
-      className={isHighlighted ? "bg-blue-300 p-1" : "p-1"}
+      className={
+        isHighlighted ? "bg-blue-300 p-1" : "p-1 flex items-stretch w-full"
+      }
       key={`${item.name}-${index}`}
       {...getItemProps({ item, index })}
       id={useId()}
@@ -35,8 +37,8 @@ const Item = memo(function Item({
 
 const Autocomplete = ({ field }: Props) => {
   const [suggestions, setSuggestions] = useState([]);
-  const [userQuery, setUserQuery] = useState("")
-  const debouncedQuery = useDebounce(userQuery)
+  const [userQuery, setUserQuery] = useState("");
+  const debouncedQuery = useDebounce(userQuery);
 
   function getSuggestions(inputValue: string) {
     fetchStations(inputValue).then((results) => {
@@ -49,8 +51,8 @@ const Autocomplete = ({ field }: Props) => {
   }
 
   useEffect(() => {
-    getSuggestions(debouncedQuery)
-  }, [debouncedQuery])
+    getSuggestions(debouncedQuery);
+  }, [debouncedQuery]);
 
   const {
     isOpen,
@@ -62,25 +64,26 @@ const Autocomplete = ({ field }: Props) => {
   } = useCombobox({
     items: suggestions || [],
     itemToString(item: ListItem | null) {
-      return item ? item.name : ''
+      return item ? item.name : "";
     },
     onInputValueChange: ({ inputValue }) => {
-      setUserQuery(inputValue!)
+      setUserQuery(inputValue!);
     },
-    onSelectedItemChange: ({ selectedItem: newSelectedItem }) => field.onChangeFn(newSelectedItem!)
+    onSelectedItemChange: ({ selectedItem: newSelectedItem }) =>
+      field.onChangeFn(newSelectedItem!),
   });
 
   return (
-    <div className="flex flex-col text-white sm:w-60 w-full sm:mr-5">
+    <div className="flex flex-col text-white md:w-60 w-full md:mr-5">
       <label {...getLabelProps()} htmlFor={field.name} id={useId()}>
         {field.label}
       </label>
-      <div className="w-full md:mr-5">
+      <div>
         <input
           type={field.type}
           {...getInputProps()}
           required
-          className="h-10 w-full block appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-100 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          className="h-10 w-full block appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-100 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
           id={useId()}
           aria-controls={useId()}
           aria-labelledby={useId()}
@@ -88,12 +91,11 @@ const Autocomplete = ({ field }: Props) => {
         />
         <ul
           {...getMenuProps()}
-          className="h-fit border-y-0 absolute z-150 overflow-y-auto border-gray-300 bg-white text-gray-900 rounded-none rounded-b-md w-full overflow-hidden box-border sm:w-60"
+          className="h-fit border-y-0 absolute z-150 overflow-y-auto border-gray-300 bg-white text-gray-900 rounded-none rounded-b-md box-border md:w-60"
           id={useId()}
           aria-labelledby={useId()}
         >
-          {
-          isOpen &&
+          {isOpen &&
             suggestions?.map((item: ListItem, index: number) => (
               <Item
                 key={item.name}
