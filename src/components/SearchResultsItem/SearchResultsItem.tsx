@@ -115,8 +115,8 @@ export default function SearchResultsItem({ journey }: Props) {
                       <div className="flex">
                         <p className="font-bold">{trip?.origin?.name}</p>
                         {trip?.plannedDeparturePlatform ? (
-                          <div className="font-bold ml-5 bg-slate-800 px-2 rounded-md">
-                            {"Pl. " + trip?.plannedDeparturePlatform}
+                          <div className="font-bold ml-5 bg-slate-800 px-2 rounded-md h-fit w-fit">
+                            {"Pl." + trip?.plannedDeparturePlatform}
                           </div>
                         ) : (
                           ""
@@ -158,8 +158,8 @@ export default function SearchResultsItem({ journey }: Props) {
                       <div className="flex">
                         <p className="font-bold">{trip?.destination?.name}</p>
                         {trip?.plannedArrivalPlatform ? (
-                          <div className="font-bold ml-5 bg-slate-800 px-2 rounded-md">
-                            {"Pl. " + trip?.plannedArrivalPlatform}
+                          <div className="font-bold ml-5 bg-slate-800 px-2 rounded-md h-fit w-fit">
+                            {"Pl." + trip?.plannedArrivalPlatform}
                           </div>
                         ) : (
                           ""

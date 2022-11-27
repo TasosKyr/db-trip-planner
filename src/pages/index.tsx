@@ -33,7 +33,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center overflow-hidden">
         <h1 className="text-2xl font-bold sm:text-md">Hey, where you off to Next?</h1>
         <Input
           setOrigin={setOrigin}
