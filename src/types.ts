@@ -43,12 +43,14 @@ interface Line {
 
 export interface Trip {
   destination: DestinationAndOrigin;
+  direction?: string;
   origin: DestinationAndOrigin;
   line: Line;
   plannedArrival: string;
   plannedArrivalPlatform: string;
   plannedDeparture: string;
   plannedDeparturePlatform: string;
+
 }
 
 export interface Journey {
