@@ -21,10 +21,6 @@ export default function Home() {
     search()
   };
 
-  useEffect(() => {
-    console.log(journeys);
-  }, [journeys])
-
   return (
     <div>
       <Head>
@@ -33,7 +29,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex flex-col items-center overflow-hidden">
+      <div className="flex flex-col items-center">
         <h1 className="text-2xl font-bold sm:text-md">Hey, where you off to Next?</h1>
         <Input
           setOrigin={setOrigin}

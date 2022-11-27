@@ -93,12 +93,11 @@ export default function SearchResultsItem({ journey }: Props) {
         </a>
         <div className={`${isOpen ? "mt-5" : "hidden"}`}>
           {journey?.legs?.map((trip: Trip, index: number) => {
-            console.log(trip);
             return (
               <>
                 <div
                   className="bg-gray-500 rounded-md px-4 mr-1 flex flex-col flex-wrap items-center mb-4 content-center"
-                  key={`${trip?.line?.name}-${index}`}
+                  key={`${trip?.line?.name}_${index}`}
                 >
                   <div className="flex items-center my-1 content-start w-full">
                     <p className="font-bold">

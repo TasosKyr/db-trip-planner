@@ -80,7 +80,7 @@ const Autocomplete = ({ field }: Props) => {
           type={field.type}
           {...getInputProps()}
           required
-          className="h-10 w-full block appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          className="h-10 w-full block appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-100 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           id={useId()}
           aria-controls={useId()}
           aria-labelledby={useId()}
@@ -88,7 +88,7 @@ const Autocomplete = ({ field }: Props) => {
         />
         <ul
           {...getMenuProps()}
-          className="max-h-80 border-y-0  absolute z-50 overflow-y-auto border-gray-300 bg-white text-gray-900 sm:text-sm rounded-none rounded-b-md"
+          className="h-fit border-y-0 absolute z-150 overflow-y-auto border-gray-300 bg-white text-gray-900 sm:text-sm rounded-none rounded-b-md md:w-60"
           id={useId()}
           aria-labelledby={useId()}
         >
