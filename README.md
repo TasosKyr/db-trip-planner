@@ -1,4 +1,4 @@
-# MediaMarkt nextjs challenge
+# Lendis challenge
 ## Table of contents
 * [General info](#general-info)
 * [Features](#features)
