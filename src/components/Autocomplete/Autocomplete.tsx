@@ -29,6 +29,7 @@ const Item = memo(function Item({
       }
       {...getItemProps({ item, index })}
       id={useId()}
+      data-test-id={`station-${index}`}
     >
       {item.name}
     </li>
@@ -88,11 +89,13 @@ const Autocomplete = ({ field }: Props) => {
           aria-controls={useId()}
           aria-labelledby={useId()}
           placeholder={field.placeholder}
+          data-test-id={`${field.name}-input`}
         />
         <ul
           {...getMenuProps()}
           className="h-fit border-y-0 absolute z-150 overflow-y-auto border-gray-300 bg-white text-gray-900 rounded-none rounded-b-md box-border md:w-60"
           id={useId()}
+          data-test-id="list"
           aria-labelledby={useId()}
         >
           {isOpen &&

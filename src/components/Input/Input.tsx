@@ -51,6 +51,7 @@ export default function Input({
           <input
             type="datetime-local"
             defaultValue={getCurrentDate()}
+            data-test-id="date-input"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setDate(e.target.value)
             }
@@ -60,6 +61,7 @@ export default function Input({
         <button
           type="submit"
           disabled={isDisabled}
+          data-test-id="search-btn"
           className={`h-10 mt-4 md:w-60 w-full justify-center rounded-md border border-transparent  py-2 px-4 font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
             isDisabled ? "bg-gray-700" : "bg-indigo-700 hover:bg-indigo-800 "
           }`}

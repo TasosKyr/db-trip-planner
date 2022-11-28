@@ -7,6 +7,7 @@ import caretDown from "../../../public/assets/CaretDown.svg";
 const TripDetails = React.lazy(() => import("src/components/TripDetails"));
 interface Props {
   journey: Journey;
+  index: number;
 }
 
 function getTimes({
@@ -42,7 +43,7 @@ function getDuration({
   );
 }
 
-export default function SearchResultsItem({ journey }: Props) {
+export default function SearchResultsItem({ journey, index }: Props) {
   const departure = journey?.legs[0]?.plannedDeparture;
   const arrival = journey?.legs[journey?.legs?.length - 1]?.plannedArrival;
 
@@ -50,7 +51,10 @@ export default function SearchResultsItem({ journey }: Props) {
 
   return (
     <>
-      <div className="my-2 h-fit sm:p-5 p-2 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex flex-col w-full flex-wrap">
+      <div
+        className="my-2 h-fit sm:p-5 p-2 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex flex-col w-full flex-wrap"
+        data-test-id={`search-result-${index}`}
+      >
         <div className="flex justify-between flex-wrap items-end w-full break-words">
           <div className="flex items-center flex-wrap">
             {getTimes({ departure, arrival })}
@@ -88,8 +92,8 @@ export default function SearchResultsItem({ journey }: Props) {
           />
         </a>
         <Suspense fallback={<div>Loading...</div>}>
-        <TripDetails journey={journey} isOpen={isOpen} />
-    </Suspense>
+          <TripDetails journey={journey} isOpen={isOpen} />
+        </Suspense>
       </div>
     </>
   );
