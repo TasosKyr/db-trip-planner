@@ -1,34 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MediaMarkt nextjs challenge
+## Table of contents
+* [General info](#general-info)
+* [Features](#features)
+* [UI](#ui)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [Use](#use)
+* [Future Development](#future-development)
+* [Deployed version](#deployed-version)
 
-## Getting Started
+## General info
+This project is a train routes search application, based on the open API from Deutsche Bahn ().
 
-First, run the development server:
+## Features
+* Autocomplete/ Typeahead functionality
+* Mobile first UI
+* Server and client error handling 
 
-```bash
-npm run dev
-# or
-yarn dev
+## UI
+![App screenshot](./images/screenshot.png)
+
+## Technologies
+Project is created with:
+* NextJS
+* React Hooks
+* React-Query
+* Tailwindcss
+* Playwright
+* Jest
+* React Testing Library
+* Vercel
+
+## Setup
+To run this project, clone it and follow the instructions:
+- Move to project's folder, install the dependencies and run the client
+```
+$ cd ../db-trip-planner
+$ npm install
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Use
+- Open localhost: `http://localhost:3000/`
+- Type your desired origin station
+- Type your desired destination station
+- Click on the main button
+- Notice the text of the main button changing depending on the status of the search
+- The search results will appear under the form area
+- Get additional details for your desired route by clicking on the Show details anchor
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Testing
+* E2E testing (headless):
+```
+$ npm run test:e2e
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+* E2E testing (headed):
+```
+$ npm run test:e2e:headed
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+* Unit testing:
+```
+$ npm run test:unit
+```
 
-## Learn More
+## Future Development
+* Investigate caching using state libraries
+* Split components to atoms
+* Add additional unit tests
+* Add additional e2e tests using Playwright
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Deployed version
+The app is deployed on Vercel under the following link: 
+https://db-trip-planner.vercel.app/
