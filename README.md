@@ -10,7 +10,7 @@
 * [Deployed version](#deployed-version)
 
 ## General info
-This project is a train routes search application, based on the open API from Deutsche Bahn ().
+This project is a train routes search application, based on the open API from Deutsche Bahn (https://v5.db.transport.rest/).
 
 ## Features
 * Autocomplete/ Typeahead functionality
