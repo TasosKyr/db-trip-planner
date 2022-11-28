@@ -19,6 +19,6 @@
       "@/components/*": ["components/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/hooks/useStations.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/hooks/useStations.js", "src/components/Input/__test__/SearchInput.test.js"],
   "exclude": ["node_modules", "e2e"]
 }

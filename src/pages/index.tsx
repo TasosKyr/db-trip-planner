@@ -46,7 +46,6 @@ export default function Home() {
           setDestination={setDestination}
           setDate={setDate}
           fetchStatus={fetchStatus}
-          date={date}
           handleOnSubmit={handleOnSubmit}
           isDisabled={isDisabled}
         />

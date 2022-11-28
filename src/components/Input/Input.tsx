@@ -2,8 +2,6 @@ import React, {
   Dispatch,
   SetStateAction,
   FormEvent,
-  useState,
-  useEffect,
 } from "react";
 import Autocomplete from "src/components/Autocomplete";
 import { Field, ListItem } from "src/types";
@@ -15,7 +13,6 @@ interface InputProps {
   setDate: Dispatch<SetStateAction<string>>;
   fetchStatus: string;
   handleOnSubmit: (e: FormEvent) => void;
-  date: string;
   isDisabled: boolean;
 }
 
@@ -59,6 +56,7 @@ export default function Input({
             type="datetime-local"
             defaultValue={getCurrentDate()}
             data-test-id="date-input"
+            // aria-role="date-input"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setDate(e.target.value)
             }
