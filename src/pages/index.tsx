@@ -23,7 +23,6 @@ export default function Home() {
       return setIsDisabled(false)
     }  else setIsDisabled(true);
   }, [origin, destination])
-  useEffect(() => console.log({origin, destination}), [origin, destination])
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
