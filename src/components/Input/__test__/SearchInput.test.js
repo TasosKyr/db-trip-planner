@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Input from "src/components/Input";
 import "@testing-library/jest-dom/extend-expect";
+import { act } from 'react-dom/test-utils';
 
 const mockedHandleOnSubmit = jest.fn();
 const mockedSetDestination = jest.fn();
@@ -23,7 +24,7 @@ const renderComponent = () => {
   return inputComponent;
 };
 
-describe("Input component - button", () => {
+describe("Input component", () => {
   it("should have disabled search button with correct text", async () => {
     renderComponent((mockedIsDisabled = true));
     const searchBtn = screen.getByText(/SELECT STATIONS/);
@@ -44,13 +45,8 @@ describe("Input component - button", () => {
 
   it("should call setDate function after defining new date", async () => {
     renderComponent();
-    const dateInput = screen.getByRole("datetime-local");
-    // fireEvent.change(dateInput, { target: { value: "2020-05-24" } });
-    console.log(dateInput)
-    // mockedSetDate.toHaveBeenCalledTimes(1);
+    const dateInput = screen.getByLabelText(/When/)
+    fireEvent.change(dateInput, { target: { value: "2020-05-24" } });
+    expect(mockedSetDate).toHaveBeenCalledTimes(1);
   });
 });
-
-// describe("Input component - date input", () => {
-  
-// });

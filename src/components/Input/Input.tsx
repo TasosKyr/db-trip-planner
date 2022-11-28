@@ -31,7 +31,7 @@ export default function Input({
       name: "origin",
       onSelectFn: setOrigin,
       label: "Where From",
-      placeholder: "e.g.Berlin Hbf",
+      placeholder: "e.g. Berlin Hbf",
     },
     {
       type: "text",
@@ -49,12 +49,13 @@ export default function Input({
           return <Autocomplete field={field} key={field.name} />;
         })}
         <div className="flex flex-col text-white md:w-60 w-full md:mr-5">
-          <label className="sm:text-sm" htmlFor="date">
+          <label className="sm:text-sm" htmlFor="date-input">
             When
           </label>
           <input
             type="datetime-local"
             defaultValue={getCurrentDate()}
+            id="date-input"
             data-test-id="date-input"
             // aria-role="date-input"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

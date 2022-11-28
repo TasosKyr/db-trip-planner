@@ -37,7 +37,7 @@ const Item = memo(function Item({
 });
 
 const Autocomplete = ({ field }: Props) => {
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState<ListItem[]>([]);
   const [userQuery, setUserQuery] = useState("");
   const debouncedQuery = useDebounce(userQuery);
 

@@ -54,6 +54,7 @@ export default function SearchResultsItem({ journey, index }: Props) {
       <div
         className="my-2 h-fit sm:p-5 p-2 bg-black bg-opacity-50 backdrop-blur-md rounded-xl drop-shadow-lg flex flex-col w-full flex-wrap"
         data-test-id={`search-result-${index}`}
+        data-testid="search-result"
       >
         <div className="flex justify-between flex-wrap items-end w-full break-words">
           <div className="flex items-center flex-wrap">
