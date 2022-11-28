@@ -5,6 +5,9 @@ test("search page is loaded successfully, performs search and returns results", 
 }) => {
   await page.goto("http://localhost:3000/");
   await expect(page).toHaveTitle(/Trip Planner/);
+  const searchButton = page.locator("data-test-id=search-btn", {
+    hasText: "SELECT STATIONS",
+  });
 
   const originInput = page.locator("data-test-id=origin-input");
   originInput.fill("Berlin");
@@ -18,10 +21,7 @@ test("search page is loaded successfully, performs search and returns results", 
   const destinationStation = page.locator("data-test-id=station-0");
   await destinationStation.click()
 
-  const searchButton = page.locator("data-test-id=search-btn", {
-    hasText: "TAKE ME THERE",
-  });
-  await expect(searchButton).toHaveAttribute("type", "submit");
+  await expect(searchButton).toHaveText("TAKE ME THERE");
 
   await searchButton.click();
 

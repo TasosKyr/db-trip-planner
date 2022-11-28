@@ -18,11 +18,12 @@ export default function Home() {
     date,
   });
 
-  useEffect(() => {
+  useEffect(()=> {
     if (origin && destination) {
-      return setIsDisabled(false);
-    } else setIsDisabled(true);
-  }, [origin, destination]);
+      return setIsDisabled(false)
+    }  else setIsDisabled(true);
+  }, [origin, destination])
+  useEffect(() => console.log({origin, destination}), [origin, destination])
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -50,7 +51,7 @@ export default function Home() {
           handleOnSubmit={handleOnSubmit}
           isDisabled={isDisabled}
         />
-        {fetchStatus === "fetching" ? <PuffLoader /> : ""}
+        {fetchStatus === "fetching" ? <PuffLoader />: ""}
         <SearchResults journeys={journeys} />
       </div>
     </div>
