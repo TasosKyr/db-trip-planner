@@ -79,7 +79,7 @@ export default function SearchResultsItem({ journey, index }: Props) {
         </div>
 
         <a
-          className="underline-offset-4 flex justify-center"
+          className="underline-offset-4 flex justify-center cursor-pointer"
           onClick={() => setIsOpen((prevState) => !prevState)}
         >
           {isOpen ? "Hide details" : "Show details"}
