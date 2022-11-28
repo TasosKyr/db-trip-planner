@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, FormEvent } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  FormEvent,
+  useState,
+  useEffect,
+} from "react";
 import Autocomplete from "src/components/Autocomplete";
 import { Field, ListItem } from "src/types";
 import { getCurrentDate } from "src/lib/helpers";
@@ -15,24 +21,25 @@ interface InputProps {
 
 export default function Input({
   fetchStatus,
-  isDisabled,
   setOrigin,
   setDestination,
   setDate,
   handleOnSubmit,
+  isDisabled
 }: InputProps) {
+
   const fields: Field[] = [
     {
       type: "text",
       name: "origin",
-      onChangeFn: setOrigin,
+      onSelectFn: setOrigin,
       label: "Where From",
       placeholder: "e.g.Berlin Hbf",
     },
     {
       type: "text",
       name: "destination",
-      onChangeFn: setDestination,
+      onSelectFn: setDestination,
       label: "Where To",
       placeholder: "e.g. Munich Hbf",
     },

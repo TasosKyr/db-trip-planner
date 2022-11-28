@@ -16,7 +16,7 @@ export type Field = {
   label: string;
   name: string;
   type: string;
-  onChangeFn: Dispatch<SetStateAction<null | ListItem>>;
+  onSelectFn: Dispatch<SetStateAction<null | ListItem>>;
   placeholder: string;
 };
 

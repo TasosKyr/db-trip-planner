@@ -10,6 +10,7 @@ export default function Home() {
   const [origin, setOrigin] = useState<ListItem | null>(null);
   const [destination, setDestination] = useState<ListItem | null>(null);
   const [date, setDate] = useState<string>(new Date().toISOString());
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const { journeys, search, fetchStatus } = useSearch({
     originId: origin?.location?.id,
@@ -17,7 +18,11 @@ export default function Home() {
     date,
   });
 
-  const isDisabled: boolean = origin?.name && destination?.name ? false : true;
+  useEffect(() => {
+    if (origin && destination) {
+      return setIsDisabled(false);
+    } else setIsDisabled(true);
+  }, [origin, destination]);
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -45,7 +50,7 @@ export default function Home() {
           handleOnSubmit={handleOnSubmit}
           isDisabled={isDisabled}
         />
-        {fetchStatus === "fetching" ? <PuffLoader />: ""}
+        {fetchStatus === "fetching" ? <PuffLoader /> : ""}
         <SearchResults journeys={journeys} />
       </div>
     </div>

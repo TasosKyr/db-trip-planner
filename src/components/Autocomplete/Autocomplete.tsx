@@ -23,8 +23,8 @@ const Item = memo(function Item({
 }: ItemProps) {
   return (
     <li
-    key={`${item.name}-${index}`}
-    className={
+      key={`${item.name}-${index}`}
+      className={
         isHighlighted ? "bg-blue-300 p-1" : "p-1 flex items-stretch w-full"
       }
       {...getItemProps({ item, index })}
@@ -67,11 +67,11 @@ const Autocomplete = ({ field }: Props) => {
     itemToString(item: ListItem | null) {
       return item ? item.name : "";
     },
-    onInputValueChange: ({ inputValue }) => {
-      setUserQuery(inputValue!);
+    onInputValueChange: ({ inputValue = "" }) => {
+      inputValue === "" ? field.onSelectFn(null) : setUserQuery(inputValue);
     },
     onSelectedItemChange: ({ selectedItem: newSelectedItem }) =>
-      field.onChangeFn(newSelectedItem!),
+      field.onSelectFn(newSelectedItem!),
   });
 
   return (
