@@ -38,7 +38,7 @@ function getDuration({
 
   return (
     <p>
-      {days > 0 ? <span>{` | ${days}d`}</span> : ` | ${hours}h ${minutes}min`}
+      {days > 0 ? <span>{` | ${days}d`}</span> : ` | ${hours}h ${minutes}min, `}
     </p>
   );
 }
@@ -60,7 +60,7 @@ export default function SearchResultsItem({ journey, index }: Props) {
           <div className="flex items-center flex-wrap">
             {getTimes({ departure, arrival })}
             {getDuration({ departure, arrival })}
-            <p>{`, ${journey?.legs?.length} Changes`}</p>
+            <p>{`${journey?.legs?.length-1} Changes`}</p>
           </div>
           <p className="font-bold sm:text-xl text-lg mx-2">
             {getPrice(journey?.price?.amount)}
