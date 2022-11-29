@@ -34,6 +34,7 @@ export default function Home() {
       <Head>
         <title>Trip Planner</title>
         <meta name="description" content="Search your train tickets" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
